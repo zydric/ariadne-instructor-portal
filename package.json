@@ -7,7 +7,7 @@
     "server": "node --experimental-strip-types server/index.ts",
     "web": "vite web --port 5173",
     "dev": "node --experimental-strip-types scripts/start-dev.ts",
-    "build": "vite build --base=./ web --outDir ../dist",
+    "build": "vite build --base=./ web --outDir ../dist --emptyOutDir",
     "start": "NODE_ENV=production node --experimental-strip-types server/index.ts",
     "test": "node --test --experimental-strip-types server/test/*.test.ts"
   },
