@@ -4,6 +4,12 @@
  * Shape and scale follow shadcn/ui defaults; motion follows Emil Kowalski's rules.
  */
 :root {
+  /* Custom Scrollbar Tokens (shadcn / Emil Kowalski style) */
+  --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.35);
+  --scrollbar-thumb-active: rgba(0, 0, 0, 0.5);
+  --scrollbar-track: transparent;
+
   /* Surfaces */
   --background: #ffffff;
   --foreground: #0a0a0a;
@@ -137,6 +143,12 @@
  */
 :root[data-theme="dark"],
 .dark {
+  /* Custom Scrollbar Tokens (Dark Mode) */
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.35);
+  --scrollbar-thumb-active: rgba(255, 255, 255, 0.5);
+  --scrollbar-track: transparent;
+
   /* Surfaces: deep charcoal gray (#141518 / #1a1b20) */
   --background: #141518;
   --foreground: #f3f4f6;
