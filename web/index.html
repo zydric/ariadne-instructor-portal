@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ariadne — Instructor Security Portal & Academic Integrity Gatekeeper</title>
+  <meta name="description" content="AI-assisted automated security gradebook, cohort vulnerability heatmap, no-code course guardrails, and CI/CD GitHub bot gatekeeper for programming education." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/components.css" />
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('ariadne-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.classList.add('dark');
+        }
+        var savedPalette = localStorage.getItem('ariadne-palette');
+        var palette = (savedPalette === 'strict') ? 'strict' : 'semantic';
+        document.documentElement.setAttribute('data-palette', palette);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <div id="app">
+    <!-- Rendered dynamically by TypeScript -->
+    <div class="initial-loader">
+      <div class="spinner"></div>
+      <p>Initializing Ariadne Instructor Security Portal...</p>
+    </div>
+  </div>
+  <div id="modal-root"></div>
+  <div id="toast-container"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

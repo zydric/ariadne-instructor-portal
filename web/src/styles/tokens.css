@@ -1,0 +1,267 @@
+/*
+ * Ariadne design tokens.
+ * Palette is strictly neutral (white → black) plus one red.
+ * Shape and scale follow shadcn/ui defaults; motion follows Emil Kowalski's rules.
+ */
+:root {
+  /* Surfaces */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --subtle-foreground: #a3a3a3;
+  --accent: #f5f5f5;
+  --border: #e5e5e5;
+  --border-strong: #d4d4d4;
+  --input: #e5e5e5;
+  --ring: #a3a3a3;
+
+  /* Primary action = black, per shadcn neutral */
+  --primary: #171717;
+  --primary-hover: #262626;
+  --primary-foreground: #fafafa;
+
+  /* Ariadne Red (Critical / Blocked / Failures) */
+  --red: #dc2626;
+  --red-hover: #b91c1c;
+  --red-soft: #fee2e2;
+  --red-border: #fca5a5;
+  --red-foreground: #991b1b;
+  --red-solid-fg: #ffffff;
+
+  /* Emerald (Pass / Check / Success) */
+  --emerald: #16a34a;
+  --emerald-hover: #15803d;
+  --emerald-soft: #dcfce7;
+  --emerald-border: #86efac;
+  --emerald-foreground: #166534;
+  --emerald-solid-fg: #ffffff;
+
+  /* Amber (Academic Integrity / Warnings / Moderate Severity) */
+  --amber: #d97706;
+  --amber-hover: #b45309;
+  --amber-soft: #fef3c7;
+  --amber-border: #fcd34d;
+  --amber-foreground: #92400e;
+  --amber-solid-fg: #ffffff;
+
+  /* Slate / Blue (Section Codes / Bot Tag / Metadata / Info) */
+  --blue: #2563eb;
+  --blue-hover: #1d4ed8;
+  --blue-soft: #dbeafe;
+  --blue-border: #93c5fd;
+  --blue-foreground: #1e40af;
+  --blue-solid-fg: #ffffff;
+
+  /* Heatmap density steps in light mode */
+  --heat-0-bg: #fafafa;
+  --heat-low-bg: #f0fdf4;
+  --heat-med-bg: #fffbeb;
+
+  /* Type */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Shape */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Motion (skill: custom curves, never ease-in, UI under 300ms) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-press: 160ms;
+  --duration-fast: 150ms;
+  --duration-modal: 220ms;
+  --duration-exit: 140ms;
+
+  /*
+   * Legacy aliases — keep tabs that have not been redesigned yet readable.
+   * Delete each alias once nothing references it.
+   */
+  --bg-primary: var(--background);
+  --bg-secondary: var(--muted);
+  --bg-card: var(--card);
+  --bg-card-hover: var(--muted);
+  --bg-card-active: var(--muted);
+  --bg-input: var(--background);
+  --border-subtle: var(--border);
+  --border-medium: var(--border-strong);
+  --border-focus: var(--ring);
+  --text-primary: var(--foreground);
+  --text-secondary: var(--muted-foreground);
+  --text-muted: var(--muted-foreground);
+  --text-inverse: var(--primary-foreground);
+  --primary-500: var(--primary);
+  --primary-600: var(--primary-hover);
+  --primary-glow: transparent;
+  --accent-cyan: var(--foreground);
+  --accent-emerald: var(--foreground);
+  --sev-critical: var(--red);
+  --sev-critical-bg: var(--red-soft);
+  --sev-critical-border: var(--red-border);
+  --sev-high: var(--red);
+  --sev-high-bg: var(--red-soft);
+  --sev-high-border: var(--red-border);
+  --sev-medium: var(--foreground);
+  --sev-medium-bg: var(--muted);
+  --sev-medium-border: var(--border-strong);
+  --sev-low: var(--muted-foreground);
+  --sev-low-bg: var(--muted);
+  --sev-low-border: var(--border);
+  --flag-integrity: var(--red);
+  --flag-integrity-bg: var(--red-soft);
+  --flag-integrity-border: var(--red-border);
+  --status-pass: var(--foreground);
+  --status-pass-bg: var(--muted);
+  --status-fail: var(--red);
+  --status-fail-bg: var(--red-soft);
+  --glass-blur: none;
+  --shadow-md: var(--shadow-sm);
+  --shadow-glow: none;
+  --transition-fast: var(--duration-fast) ease;
+  --transition-normal: 200ms var(--ease-out);
+}
+
+/*
+ * Charcoal grayish dark mode (per user specification: not pure black,
+ * comfortable charcoal slate gray tones for academic IDE aesthetic).
+ */
+:root[data-theme="dark"],
+.dark {
+  /* Surfaces: deep charcoal gray (#141518 / #1a1b20) */
+  --background: #141518;
+  --foreground: #f3f4f6;
+  --card: #1a1b20;
+  --muted: #222329;
+  --muted-foreground: #9ca3af;
+  --subtle-foreground: #6b7280;
+  --accent: #26272e;
+  --border: #2a2b32;
+  --border-strong: #3e404a;
+  --input: #24252b;
+  --ring: #52545f;
+
+  /* Primary action = clean inverted light neutral */
+  --primary: #f4f4f5;
+  --primary-hover: #e4e4e7;
+  --primary-foreground: #09090b;
+
+  /* Ariadne Red calibrated for dark charcoal surface */
+  --red: #ef4444;
+  --red-hover: #f87171;
+  --red-soft: rgba(239, 68, 68, 0.2);
+  --red-border: rgba(239, 68, 68, 0.45);
+  --red-foreground: #fca5a5;
+  --red-solid-fg: #ffffff;
+
+  /* Emerald (Pass / Check / Success) in dark mode */
+  --emerald: #10b981;
+  --emerald-hover: #34d399;
+  --emerald-soft: rgba(16, 185, 129, 0.2);
+  --emerald-border: rgba(16, 185, 129, 0.45);
+  --emerald-foreground: #6ee7b7;
+  --emerald-solid-fg: #022c22;
+
+  /* Amber (Academic Integrity / Warnings) in dark mode */
+  --amber: #f59e0b;
+  --amber-hover: #fbbf24;
+  --amber-soft: rgba(245, 158, 11, 0.2);
+  --amber-border: rgba(245, 158, 11, 0.45);
+  --amber-foreground: #fde68a;
+  --amber-solid-fg: #451a03;
+
+  /* Slate / Blue (Info / Section / Metadata) in dark mode */
+  --blue: #3b82f6;
+  --blue-hover: #60a5fa;
+  --blue-soft: rgba(59, 130, 246, 0.2);
+  --blue-border: rgba(59, 130, 246, 0.45);
+  --blue-foreground: #93c5fd;
+  --blue-solid-fg: #ffffff;
+
+  /* Heatmap density in dark mode */
+  --heat-0-bg: #1a1b20;
+  --heat-low-bg: rgba(16, 185, 129, 0.08);
+  --heat-med-bg: rgba(245, 158, 11, 0.12);
+
+  /* Charcoal dark shadows */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.35);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.65);
+}
+
+/*
+ * Strict Ariadne Palette (Monochrome + Ariadne Red only)
+ * Follows strict design guidelines: neutral (white → black) + one red.
+ * Available via the palette toggle for users who prefer strict minimalism.
+ */
+:root[data-palette="strict"] {
+  /* Pass / Check / Success maps to clean monochrome */
+  --emerald: var(--foreground);
+  --emerald-hover: var(--foreground);
+  --emerald-soft: var(--muted);
+  --emerald-border: var(--border-strong);
+  --emerald-foreground: var(--foreground);
+  --emerald-solid-fg: var(--background);
+
+  /* Academic Integrity / Warnings map to Ariadne Red */
+  --amber: var(--red);
+  --amber-hover: var(--red-hover);
+  --amber-soft: var(--red-soft);
+  --amber-border: var(--red-border);
+  --amber-foreground: var(--red-foreground);
+  --amber-solid-fg: var(--red-solid-fg);
+
+  /* Info / Section Codes / Bot tag map to clean muted */
+  --blue: var(--muted-foreground);
+  --blue-hover: var(--foreground);
+  --blue-soft: var(--muted);
+  --blue-border: var(--border);
+  --blue-foreground: var(--muted-foreground);
+  --blue-solid-fg: var(--foreground);
+
+  /* Heatmap density in strict mode: neutral grays + red */
+  --heat-low-bg: var(--muted);
+  --heat-med-bg: var(--accent);
+}
+
+:root[data-theme="dark"][data-palette="strict"],
+.dark[data-palette="strict"] {
+  /* Pass / Check / Success maps to clean monochrome in dark mode */
+  --emerald: var(--foreground);
+  --emerald-hover: var(--foreground);
+  --emerald-soft: var(--muted);
+  --emerald-border: var(--border-strong);
+  --emerald-foreground: var(--foreground);
+  --emerald-solid-fg: var(--background);
+
+  /* Academic Integrity / Warnings map to Ariadne Red in dark mode */
+  --amber: var(--red);
+  --amber-hover: var(--red-hover);
+  --amber-soft: var(--red-soft);
+  --amber-border: var(--red-border);
+  --amber-foreground: var(--red-foreground);
+  --amber-solid-fg: var(--red-solid-fg);
+
+  /* Info / Section Codes / Bot tag map to clean dark muted */
+  --blue: var(--muted-foreground);
+  --blue-hover: var(--foreground);
+  --blue-soft: var(--muted);
+  --blue-border: var(--border);
+  --blue-foreground: var(--muted-foreground);
+  --blue-solid-fg: var(--foreground);
+
+  /* Heatmap density in dark mode strict */
+  --heat-low-bg: #222329;
+  --heat-med-bg: #2d2e38;
+}
+
