@@ -290,6 +290,7 @@ export class ClientStore {
         }
         const percentage = totalStudents > 0 ? Math.round((affectedCount / totalStudents) * 100) : 0;
         return {
+          category: flaw,
           cwe: flaw.cwe,
           title: flaw.title,
           affectedCount,

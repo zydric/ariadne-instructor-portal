@@ -35,7 +35,7 @@ export function renderHeatmapView(state: AppState): string {
       return `
         <td 
           class="heatmap-cell ${heatClass}" 
-          data-cwe="${cell.category.cwe}" 
+          data-cwe="${cell.category?.cwe || cell.cwe || "CWE-89"}" 
           data-sec-id="${row.section.id}"
           data-sec-name="${row.section.name}"
           data-affected="${cell.affectedCount}"

@@ -70,6 +70,18 @@ class StateManager {
       let assignments: any[] = [];
       let guardrails: any[] = [];
 
+      // Detect static hosting (e.g. GitHub Pages) immediately to avoid doomed 404 network requests
+      const isStaticHost =
+        typeof window !== "undefined" &&
+        (window.location.hostname.endsWith("github.io") ||
+         window.location.hostname.endsWith("pages.dev") ||
+         window.location.protocol === "file:" ||
+         window.location.search.includes("demo=true"));
+
+      if (isStaticHost) {
+        this.isStaticMode = true;
+      }
+
       // Check if backend API server is reachable
       if (!this.isStaticMode) {
         try {
