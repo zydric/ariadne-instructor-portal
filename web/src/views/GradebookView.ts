@@ -129,17 +129,17 @@ export function renderGradebookView(state: AppState): string {
             </div>
             <div class="panel-subtitle">Evaluated live against course policy rules</div>
           </div>
-          <div style="display: flex; gap: 8px; align-items: center;">
+          <div class="gradebook-header-actions">
             <input 
               type="text" 
               id="gradebook-search" 
-              class="form-input" 
+              class="form-input gradebook-search-input" 
               placeholder="Search by name, ID, or handle..." 
-              style="width: 260px; height: 32px; font-size: 13px;"
             />
           </div>
         </div>
 
+        <div class="table-scroll-hint hide-desktop">← Scroll horizontally to inspect all columns →</div>
         <div class="table-responsive">
           <table class="data-table" id="gradebook-table">
             <thead>

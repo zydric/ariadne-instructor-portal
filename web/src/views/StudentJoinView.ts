@@ -35,7 +35,7 @@ export function renderStudentJoinView(state: AppState): string {
         </div>
       </div>
 
-      <div class="student-join-grid" style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: start;">
+      <div class="student-join-grid">
         <!-- Registration Form -->
         <div class="panel-card">
           <div class="panel-header">

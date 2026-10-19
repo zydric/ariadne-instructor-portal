@@ -82,7 +82,7 @@ export function renderHeatmapView(state: AppState): string {
             <span>Vulnerability Density Matrix</span>
             <span class="badge badge-info">${state.selectedSectionId ? `Section: ${matrix[0]?.section?.name || 'Selected'}` : 'All Sections'}</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted-foreground);">
+          <div class="heatmap-legend" style="display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted-foreground); flex-wrap: wrap;">
             <span>Scale:</span>
             <span style="display: inline-flex; align-items: center; gap: 4px;">
               <span style="width: 10px; height: 10px; border-radius: 2px; background: var(--heat-0-bg); border: 1px solid var(--border);"></span> 0%
@@ -99,7 +99,8 @@ export function renderHeatmapView(state: AppState): string {
           </div>
         </div>
 
-        <div style="padding: 20px; overflow-x: auto;">
+        <div class="table-scroll-hint hide-desktop">← Scroll horizontally to inspect sections & CWE density →</div>
+        <div class="heatmap-wrapper">
           <table class="heatmap-table">
             <thead>
               <tr>

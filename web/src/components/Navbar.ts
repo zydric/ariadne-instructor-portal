@@ -68,7 +68,8 @@ export function renderNavbar(state: AppState): string {
               </svg>
             </button>
             <button class="btn btn-outline btn-sm" id="btn-reset-demo" title="Reset all submissions, scores, and guardrails to initial seed">
-              Reset Demo
+              <span class="btn-text-full">Reset Demo</span>
+              <span class="btn-text-short">Reset</span>
             </button>
           </div>
         </div>
