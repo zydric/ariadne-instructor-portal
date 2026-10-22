@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ariadne — Instructor Journey Slide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 20px;
+    }
+
+    /* 16:9 Slide Canvas */
+    .slide-canvas {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #a40808 0%, #890505 50%, #6d0000 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 56px 36px;
+      color: #ffffff;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+      border-radius: 4px;
+    }
+
+    /* Subtle Technical Grid Lines */
+    .slide-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    /* Radial Vignette */
+    .slide-canvas::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, transparent 60%, rgba(30, 0, 0, 0.4) 100%);
+      pointer-events: none;
+    }
+
+    /* Header Bar */
+    .slide-header {
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .brand-logo {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .brand-text {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+    }
+
+    .slide-title {
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-top: 18px;
+      line-height: 1;
+      color: #ffffff;
+    }
+
+    /* Timeline Section */
+    .timeline-container {
+      position: relative;
+      z-index: 2;
+      margin: 10px 0 20px;
+    }
+
+    /* Connecting Dashed Line */
+    .timeline-track {
+      position: absolute;
+      top: 30px;
+      left: 7%;
+      right: 7%;
+      height: 4px;
+      background-image: repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.9) 0,
+        rgba(255, 255, 255, 0.9) 14px,
+        transparent 14px,
+        transparent 24px
+      );
+      z-index: 1;
+    }
+
+    /* 5 Steps Grid */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 0 16px;
+    }
+
+    /* Vertical Divider Line between columns */
+    .step-column:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 80px;
+      bottom: 0;
+      right: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Number Badges */
+    .step-badge {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #f7ede2;
+      color: #221814;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+      margin-bottom: 24px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Highlighted Step 5 Badge */
+    .step-column:last-child .step-badge {
+      background: #3d0303;
+      color: #ffffff;
+      border: 3px solid #ffffff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .step-content {
+      width: 100%;
+      text-align: left;
+    }
+
+    .step-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      line-height: 1.15;
+      color: #ffffff;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 400;
+    }
+
+    /* Footer Callout Pill */
+    .slide-footer {
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      padding: 14px 28px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .footer-quote {
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    /* Scaling on smaller windows */
+    @media (max-width: 1024px) {
+      .slide-canvas {
+        padding: 28px 36px 24px;
+      }
+      .slide-title {
+        font-size: 48px;
+      }
+      .step-badge {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+      .timeline-track {
+        top: 24px;
+      }
+      .step-title {
+        font-size: 17px;
+      }
+      .step-desc {
+        font-size: 12px;
+      }
+      .footer-quote {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide-canvas">
+    <!-- Header -->
+    <div class="slide-header">
+      <div class="brand-row">
+        <!-- Ariadne Shield Logo -->
+        <svg class="brand-logo" viewBox="0 0 1095 1095">
+          <path d="M877.23 276.5C878.25 280.68 877.67 285.19 877.99 289.5C878.46 295.84 878.91 302.12 878.98 308.5C879.18 326.5 879.21 344.51 879.56 362.5C881.16 444.91 875.15 527.77 860.08 608.53C855.14 635.01 849.28 661.2 840.25 686.69C837.81 693.57 833.16 709.89 828.5 714.72C819.02 695.21 811.43 674.66 802.74 654.75C790.15 625.89 777.15 597.23 763.81 568.71C723.5 482.46 679.12 398.26 636.16 313.32C616.25 273.95 595.14 235.14 574.14 196.35C568.65 186.21 562.98 176.15 557.52 165.99C554.66 160.66 552.13 153.38 547.51 149.5C543.33 151.89 537.59 165.75 535.01 170.48C524.88 189.06 514.62 207.56 504.84 226.32C487.51 259.56 469.31 292.34 452.19 325.7C433.84 361.45 415.92 397.4 397.5 433.1C390.08 430.29 378.36 422 373.76 415.5C376.05 408.87 383.87 399.07 383.5 392.71C378.41 396.59 373.68 401.16 369.48 405.98C366.81 409.03 364.41 412.47 362.59 416.1C357.1 427.04 361.49 436.88 369.5 445C382.27 457.95 400.47 465.73 417.05 472.48C422.32 474.62 427.65 476.6 433.03 478.48C500.84 502.21 573.06 507.47 640.65 531.8C670.88 542.68 706 557.41 723.36 586.17C752.11 633.78 696.55 676.87 659.24 695.74C651.61 699.6 643.87 703.27 635.93 706.45C626.11 710.4 616.1 713.88 606.22 717.68C593.16 722.71 577.03 728.27 567.12 738.63C560.1 745.97 559.9 755.91 559.92 765.5C559.94 780.5 560.67 795.49 560.98 810.5C571.87 816.22 579.72 826.82 579.81 839.5C579.94 856.44 565.32 871.2 548.5 871.82C530.96 872.47 515.05 857.05 515.2 839.5C515.31 826.76 523.18 816.35 534 810.5C534.21 776.11 523.78 735.99 556.14 712.63C576.72 697.78 602.02 690.95 625.28 681.75C643.65 674.48 661.52 664.71 677.04 652.51C690.14 642.21 706.81 627.18 703.81 608.54C702.03 597.48 691.76 588.51 683.22 582.32C662.24 567.12 637.06 558.49 612.6 550.86C580.07 540.71 546.74 535.13 513.53 527.94C476.44 519.9 438.77 510.66 403.56 495.89C377.22 484.84 344.15 469.06 335.01 439.46C323.77 403.03 361.46 373.6 388.13 356.61C393.83 352.97 404.4 348.47 408.97 344.47C411.53 342.23 412.84 337.84 414.39 334.88C418.3 327.43 422.11 319.94 425.99 312.48C435.68 293.86 445.35 275.22 455.18 256.68C459.32 248.86 467.65 236.6 469.55 228.5C449.06 239.3 428.87 250.57 407.86 260.38C361.89 281.82 314.63 300.7 266.11 315.5C263.62 322.94 265.07 332.63 264.84 340.5C264.3 358.5 264.15 376.49 264.24 394.5C264.48 443.17 267.61 491.41 273.92 539.5C275.76 553.52 277.7 567.59 279.92 581.52C280.96 588.05 281.47 594.77 283.5 601.12C301.5 563.47 319.5 525.83 337.5 488.18C345.6 493.95 353.7 499.73 361.8 505.5C354.26 520.08 347.56 535.1 340.37 549.85C324.66 582.11 309.22 614.69 295.27 647.75C288.95 662.74 282.66 677.75 276.2 692.68C272.61 700.98 269.54 709.63 265.5 717.73C262.51 712.83 261.66 707.01 259.79 701.64C257.34 694.61 254.65 687.92 252.7 680.72C250.12 671.19 246.63 661.87 244.27 652.28C239.63 633.49 236.06 614.64 232.79 595.6C219.57 518.74 214.2 440.73 215.48 362.5C215.77 344.84 215.85 327.17 216.04 309.5C216.11 302.78 216.5 296.17 217.01 289.5C217.34 285.18 216.89 280.73 217.71 276.5C229.6 272.19 242.1 269.9 254.29 266.7C269.78 262.64 285.21 258.07 300.33 252.78C351.65 234.8 400.86 211.2 448.39 184.89C472.91 171.32 496.56 156 519.78 140.32C526.32 135.9 532.61 130.9 539.46 126.97C541.59 125.75 545 123.04 547.5 123.04C550.01 123.04 553.43 125.75 555.56 126.96C562.21 130.76 568.31 135.6 574.64 139.91C597.99 155.8 621.93 171.15 646.63 184.88C694.93 211.73 745.25 235.98 797.63 253.81C813.07 259.07 828.79 263.82 844.62 267.76C855.55 270.49 866.55 272.87 877.23 276.5ZM547.5 344.68C553.46 353.95 557.8 365.17 562.26 375.25C571.77 396.75 582.09 418.06 592.27 439.25C598.24 451.68 603.98 464.26 609.65 476.83C612.54 483.24 617.18 490.2 618.5 497.02C611.05 495.49 603.73 493.07 596.36 491.22C581.48 487.48 566.49 484.14 551.45 481.15C537.06 478.3 522.69 475.46 508.37 472.28C502.22 470.92 495.65 469.91 489.83 467.5C509.05 426.56 528.28 385.62 547.5 344.68ZM456.5 541.03C511.17 556.66 568.27 562.32 622.05 581.48C631.67 584.9 641.2 588.59 650.35 593.17C654.34 595.16 659.04 597.06 662.01 600.51C666.67 605.94 667.26 614.67 665.84 621.4C663.52 632.39 653.86 637.16 645.1 642.59C623.84 655.74 599.52 664.02 575.77 671.32C556.83 677.14 538.58 685.3 520.24 692.68C484.87 706.91 453.66 722.37 423.38 745.94C409.04 757.1 385.18 779.93 379.97 797.5C414.4 835.19 456.47 866.16 499.98 892.53C511.06 899.25 522.1 905.87 533.53 911.99C536.6 913.64 544.3 918.74 547.5 918.75C550.02 918.76 553.39 916.24 555.59 915.09C561.7 911.92 567.75 908.66 573.74 905.26C597.65 891.65 620.5 876.32 642.97 860.48C649.39 855.96 655.7 851.24 661.87 846.4C664.11 844.64 667.65 842.72 668.46 839.89C669.78 835.33 665.47 818.5 664.22 813.31C657.62 785.86 643.56 760.54 626.1 738.5C634.42 733.64 647.87 730.08 657.3 725.79C675.07 717.69 691.68 707.97 707.5 696.57C718.5 721.25 729.5 745.93 740.5 770.61C758.44 772.57 776.38 774.54 794.32 776.5C791.33 782.54 786.67 787.77 782.65 793.16C775.13 803.28 766.77 812.54 758.67 822.18C730.75 855.42 697.23 885.3 661.91 910.43C647.78 920.48 633.05 929.5 618.65 939.12C602.45 949.94 585.91 959.48 568.17 967.64C563.87 969.62 551.59 976.12 547.5 976.11C542.75 976.11 532.88 970.36 528.24 968.29C509.97 960.11 492.91 950.27 476.33 939.16C461.94 929.51 447.19 920.52 433.06 910.46C397.77 885.34 364.2 855.42 336.36 822.16C328.28 812.5 319.91 803.25 312.37 793.14C308.38 787.79 303.58 782.56 300.77 776.5C312.28 774.68 323.82 773.15 335.5 772.17C341.85 771.64 348.18 771.77 354.5 770.89C359.43 758.5 365.58 746.57 370.71 734.25C387.07 694.99 404.17 655.96 421.68 617.23C429.36 600.25 437.11 583.26 444.65 566.21C448.23 558.13 451.2 548.08 456.5 541.03Z" fill-rule="evenodd" stroke-width="0.25" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-text">Ariadne</span>
+      </div>
+      <h1 class="slide-title">Instructor Journey</h1>
+    </div>
+
+    <!-- Timeline & 5 Steps -->
+    <div class="timeline-container">
+      <div class="timeline-track"></div>
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-column">
+          <div class="step-badge">1</div>
+          <div class="step-content">
+            <h2 class="step-title">Set Guardrails</h2>
+            <p class="step-desc">
+              Instructor selects syllabus packs (e.g. 3rd Year Web) and defines policy thresholds like Zero Critical with zero manual scripting.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-column">
+          <div class="step-badge">2</div>
+          <div class="step-content">
+            <h2 class="step-title">Gatekeeper Scans</h2>
+            <p class="step-desc">
+              As students push code to GitHub, Ariadne automatically evaluates compliance and calculates live 0–100 scores in real time.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-column">
+          <div class="step-badge">3</div>
+          <div class="step-content">
+            <h2 class="step-title">Audit Integrity</h2>
+            <p class="step-desc">
+              Detects bypass attempts like commented-out queries and suppressions with forensic before/after visual diff evidence.
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-column">
+          <div class="step-badge">4</div>
+          <div class="step-content">
+            <h2 class="step-title">Spot Cohort Gaps</h2>
+            <p class="step-desc">
+              Real-time heatmap identifies section-wide weaknesses across OWASP categories (e.g. 57% of Section 3A making SQLi mistakes).
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 5 (Highlighted) -->
+        <div class="step-column">
+          <div class="step-badge">5</div>
+          <div class="step-content">
+            <h2 class="step-title">Teach with Co-Pilot</h2>
+            <p class="step-desc">
+              One-click generates targeted lecture talking points, secure code diffs, and formative assessment quizzes to close the loop.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Callout -->
+    <div class="slide-footer">
+      <p class="footer-quote">
+        Ariadne turns raw vulnerability scans into pedagogical insights, closing the loop between automated grading and classroom teaching.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
